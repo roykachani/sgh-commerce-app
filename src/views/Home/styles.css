@@ -1,0 +1,24 @@
+.main_container {
+	min-height: 100%;
+	display: block;
+	position: absolute;
+	/* left: 0px;
+	top: 110px; */
+	width: 100%;
+}
+
+.welcome_container {
+	margin-top: 110px;
+	display: flex;
+	justify-content: center;
+}
+
+.productsSale_container {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.carrousel_container {
+}
