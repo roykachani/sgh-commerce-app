@@ -29,7 +29,7 @@ export function userReducer(state, action) {
 			return {
 				loading: false,
 				error: true,
-				user: null,
+				user: action.payload,
 			};
 		case FETCHING:
 			return {
