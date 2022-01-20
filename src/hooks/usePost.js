@@ -17,8 +17,7 @@ export const usePost = () => {
 			// console.log(data, 'datapost');
 			return data;
 		} catch (error) {
-			console.log(error);
-			throw Error('error post');
+			console.log(error, 'error post');
 		}
 	};
 	// console.log(state);
