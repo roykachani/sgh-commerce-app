@@ -41,7 +41,10 @@ const Login = () => {
 		try {
 			dispatch({ type: POSTING });
 			console.log(data);
-			const response = await post('auth/login', data);
+			const response = await post(
+				`${process.env.REACT_APP_BACK_ENPOINT_LOG}`,
+				data
+			);
 			console.log(response);
 			dispatch({ type: POST_SUCCESS, payload: response.userData });
 			authenticate(response);
