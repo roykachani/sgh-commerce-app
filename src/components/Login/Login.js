@@ -60,12 +60,12 @@ const Login = () => {
 
 	return (
 		<>
-			<div className="login_box">
-				<section className="login_ctn_box">
-					<div className="login_title_box">
-						<h2 className="login_title">Ingresar</h2>
+			<div className="form_box">
+				<section className="form_ctn_box">
+					<div className="form_title_box">
+						<h2 className="form_title">Ingresar</h2>
 					</div>
-					<div className="login_body">
+					<div className="form_body">
 						<form className="login_form" onSubmit={handleSubmit(submitLogin)}>
 							<input
 								{...register('email')}
@@ -81,7 +81,7 @@ const Login = () => {
 								placeholder="password"
 							/>
 							<span className="errors_text">{errors.password?.message}</span>
-							<button type="submit" className="btn_log">
+							<button type="submit" className="btn_form">
 								Ingresa
 							</button>
 						</form>

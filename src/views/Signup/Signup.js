@@ -6,7 +6,7 @@ const Signup = () => {
 		<>
 			<main className="main_container">
 				<Header />
-				<section className="log_container">
+				<section className="form_main_container">
 					<Register />
 				</section>
 			</main>
