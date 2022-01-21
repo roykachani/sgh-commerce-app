@@ -11,3 +11,67 @@ body {
 	background: #121212;
 	color: whitesmoke;
 }
+
+.btn_primary {
+	background-color: #e0ff00;
+	cursor: pointer;
+	color: #121212;
+	font-weight: 700;
+	width: 90px;
+	height: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 2px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	-ms-border-radius: 2px;
+	-o-border-radius: 2px;
+	transition: 0.5s ease all;
+	-webkit-transition: 0.5s ease all;
+	-moz-transition: 0.5s ease all;
+	-ms-transition: 0.5s ease all;
+	-o-transition: 0.5s ease all;
+}
+
+.btn_primary:hover {
+	transition: 0.5s ease all;
+	background: #ffd000f5;
+	color: #121212;
+	-webkit-transition: 0.5s ease all;
+	-moz-transition: 0.5s ease all;
+	-ms-transition: 0.5s ease all;
+	-o-transition: 0.5s ease all;
+}
+
+.btn_secondary {
+	background: inherit;
+	color: #cacaca;
+	width: 90px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	cursor: pointer;
+	border: 2px solid #e0ff00;
+	border-radius: 2px;
+	transition: 0.5s ease all;
+	-webkit-transition: 0.5s ease all;
+	-moz-transition: 0.5s ease all;
+	-ms-transition: 0.5s ease all;
+	-o-transition: 0.5s ease all;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	-ms-border-radius: 2px;
+	-o-border-radius: 2px;
+}
+.btn_secondary:hover {
+	transition: 0.5s ease all;
+	background: whitesmoke;
+	color: #121212;
+	-webkit-transition: 0.5s ease all;
+	-moz-transition: 0.5s ease all;
+	-ms-transition: 0.5s ease all;
+	-o-transition: 0.5s ease all;
+}
