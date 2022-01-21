@@ -18,7 +18,7 @@ export default function welcome() {
 					comercio de indumentaria masculina, contamos con stock permanente.
 					Sponsored by Saggash Extreme.
 				</p>
-				<button className="btn_products">Ver Productos</button>
+				<button className="btn_primary btn_products">Ver Productos</button>
 			</div>
 			<div className="welcome_images">
 				<ImageSlider slides={SliderData} />

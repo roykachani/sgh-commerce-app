@@ -82,18 +82,7 @@
 }
 
 .nav_login {
-	background-color: #e0ff00;
-	justify-content: center;
-	cursor: pointer;
-	color: #121212;
 	font-weight: 700;
 	width: 140px;
 	height: 45px;
-	display: flex;
-	align-items: center;
-	border-radius: 1 solid;
-	-webkit-border-radius: 1px solid;
-	-moz-border-radius: 1 solid;
-	-ms-border-radius: 1 solid;
-	-o-border-radius: 1 solid;
 }
