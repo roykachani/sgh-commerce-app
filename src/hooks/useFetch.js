@@ -1,14 +1,15 @@
-import { useEffect, useReducer } from 'react';
-
-import { userReducer, inicialState } from '../reducers/user';
-
-export const useFetch = (url, options) => {
-	const getData = async () => {
-		console.log('getdata', url);
-
-		const response = await fetch(url, options);
-		const { data } = await response.json();
-
-		return data;
+export const useFetch = () => {
+	const getData = async (endPoint, options) => {
+		try {
+			console.log('getdata endpoint', endPoint);
+			const response = await fetch(
+				`${process.env.REACT_APP_BACKEND_URL}${endPoint}`,
+				options
+			);
+			const data = await response.json();
+			console.log(data, 'datafetch ');
+			return data;
+		} catch (error) {}
 	};
+	return [getData];
 };
