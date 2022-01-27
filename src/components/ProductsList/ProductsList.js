@@ -37,9 +37,11 @@ const ProductsList = () => {
 
 	if (state.loading === true)
 		return (
-			<>
-				<div>cargando productos...</div>
-			</>
+			<section className="products_container">
+				<div className="text_center">
+					<h1 className="products_cards_title">Productos</h1>
+				</div>
+			</section>
 		);
 	else if (!!state) {
 		console.log(state.products.data, 'datita');
