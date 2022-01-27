@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from '../../components/Header/Header';
 import ProductsSale from '../../components/ProductSale/ProductSale';
 import Welcome from '../../components/Welcome/welcome';
 
@@ -9,7 +8,6 @@ const Home = () => {
 	return (
 		<>
 			<main className="main_container">
-				<Header />
 				<section className="welcome_container">
 					<Welcome />
 				</section>
