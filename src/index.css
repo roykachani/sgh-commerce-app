@@ -13,7 +13,7 @@ body {
 }
 
 .btn_primary {
-	background-color: #e0ff00;
+	border: none;
 	cursor: pointer;
 	color: #121212;
 	font-weight: 700;
@@ -36,7 +36,6 @@ body {
 
 .btn_primary:hover {
 	transition: 0.5s ease all;
-	background: #ffd000f5;
 	color: #121212;
 	-webkit-transition: 0.5s ease all;
 	-moz-transition: 0.5s ease all;
@@ -46,7 +45,7 @@ body {
 
 .btn_secondary {
 	background: inherit;
-	color: #cacaca;
+	color: #00a698;
 	width: 90px;
 	height: 40px;
 	display: flex;
@@ -54,7 +53,7 @@ body {
 	justify-content: center;
 	text-align: center;
 	cursor: pointer;
-	border: 2px solid #e0ff00;
+	border: 1px solid #00a698;
 	border-radius: 2px;
 	transition: 0.5s ease all;
 	-webkit-transition: 0.5s ease all;
@@ -68,7 +67,7 @@ body {
 }
 .btn_secondary:hover {
 	transition: 0.5s ease all;
-	background: whitesmoke;
+	background: #00a698;
 	color: #121212;
 	-webkit-transition: 0.5s ease all;
 	-moz-transition: 0.5s ease all;

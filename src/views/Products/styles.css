@@ -1,9 +1,12 @@
+/*products page*/
 .products_main_container {
 	margin-top: 110px;
 	height: auto;
 	display: flex;
 	justify-content: center;
 }
+
+/*product list */
 .products_container {
 	width: 1000px;
 	display: flex;
@@ -20,6 +23,8 @@
 	flex-wrap: wrap;
 	justify-content: center;
 }
+
+/* product card */
 
 .card_item {
 	width: 252px;
@@ -71,7 +76,9 @@
 .btn_card_primary {
 	border: none;
 	margin-left: 5px;
-	font-weight: 700;
+	font-weight: 500;
+	background: #987d2c;
+	color: whitesmoke;
 }
 .btn_card_secondary {
 	margin-right: 5px;

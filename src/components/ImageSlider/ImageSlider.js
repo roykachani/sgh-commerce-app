@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
-import ArrowForward from '../Icons/ArrowForward';
-import ArrowBack from '../Icons/ArrowBack';
+// import ArrowForward from '../Icons/ArrowForward';
+// import ArrowBack from '../Icons/ArrowBack';
 
 import './styles.css';
 
@@ -12,15 +12,18 @@ const ImageSlider = ({ slides }) => {
 	const nextSlide = () => {
 		setCurrent(current === length - 1 ? 0 : current + 1);
 	};
-	const prevSlide = () => {
-		setCurrent(current === 0 ? length - 1 : current - 1);
-	};
+	// const prevSlide = () => {
+	// 	setCurrent(current === 0 ? length - 1 : current - 1);
+	// };
+	setTimeout(() => {
+		nextSlide();
+	}, 4000);
 
 	return (
 		<>
 			<section className="slider_container">
-				<ArrowBack className="left_arrow" onClick={prevSlide} />
-				<ArrowForward className="right_arrow" onClick={nextSlide} />
+				{/* <ArrowBack className="left_arrow" onClick={prevSlide} />
+				<ArrowForward className="right_arrow" onClick={nextSlide} /> */}
 				{slides.map((slide, index) => {
 					return (
 						<div

@@ -26,7 +26,7 @@ const ProductCards = (products) => {
 							</button>
 						</Link>
 						<button className="btn_primary btn_card btn_card_primary">
-							agregar
+							agregar +
 						</button>
 					</div>
 				</div>

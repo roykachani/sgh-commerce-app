@@ -11,7 +11,7 @@ const BagIcon = (props) => (
 	>
 		<g
 			fill="none"
-			stroke="#00ff15"
+			stroke="#987d2c"
 			strokeWidth={2}
 			strokeLinecap="round"
 			strokeLinejoin="round"
