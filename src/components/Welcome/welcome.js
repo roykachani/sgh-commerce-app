@@ -20,9 +20,9 @@ export default function welcome() {
 						<div className="text_about">
 							<p className="body_desciption">
 								Renova tu placard, tenemos disponibles sacos, trajes, camisas y
-								mucho mas. Mas de 30 años de trayectoria en el comercio de
-								indumentaria masculina, contamos con stock permanente. Sponsored
-								by Saggash Extreme.
+								mucho mas. Contamos con más de 30 años de trayectoria en el
+								comercio de indumentaria masculina. Sponsored by Saggash
+								Extreme.
 							</p>
 							<Link to="/products">
 								<button className="btn_secondary btn_products">
