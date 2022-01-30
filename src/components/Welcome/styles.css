@@ -17,13 +17,13 @@
 	display: flex;
 	flex-direction: column;
 	font-size: 4rem;
-	color: #22bbae;
+	color: #fff;
 	text-align: center;
+	font-style: italic;
+	font-weight: 100;
 	user-select: none;
 }
-.t2 {
-	color: #fff;
-}
+
 .text_about {
 	display: flex;
 	flex-direction: column;
@@ -43,7 +43,7 @@
 	margin: 5px 0 25px 0;
 	font-weight: 400;
 	font-size: 15px;
-	color: #cacaca;
+	color: #aaaaaa;
 	width: 750px;
 	text-align: center;
 	height: auto;
