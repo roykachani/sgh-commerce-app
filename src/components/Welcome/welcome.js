@@ -1,4 +1,3 @@
-import React from 'react';
 import ImageSlider from '../ImageSlider/ImageSlider';
 import { SliderData } from '../../utils/SliderData';
 
