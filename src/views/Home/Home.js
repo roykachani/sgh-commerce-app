@@ -1,4 +1,4 @@
-import React from 'react';
+import Footer from '../../components/Footer/Footer';
 import ProductsSale from '../../components/ProductSale/ProductSale';
 import Welcome from '../../components/Welcome/welcome';
 
@@ -14,11 +14,11 @@ const Home = () => {
 				<section className="productsSale_container">
 					<ProductsSale />
 				</section>
-				<section className="carrousel_container">
+				{/* <section className="carrousel_container">
 					carrousel metodos de envio
-				</section>
+				</section> */}
+				<Footer />
 			</main>
-			{/* <div>Footer</div> */}
 		</>
 	);
 };
