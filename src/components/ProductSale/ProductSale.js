@@ -25,7 +25,7 @@ export default function ProductsSale() {
 			</div>
 			<div className="container_product_cards">
 				<h2 className="text_center">
-					<span className="products_cards_title">Productslist</span>
+					<span className="products_cards_title">Sale</span>
 				</h2>
 				<div className="cnt_cards">
 					<div className="box_product_cards">{/* <ProductCards /> */}</div>
