@@ -1,0 +1,104 @@
+.footer_container {
+	max-width: 1230px;
+	margin: 0 auto;
+	padding: 25px 30px;
+}
+
+.footer {
+	border-top: 1px solid #ceaf70;
+	padding-top: 30px;
+}
+
+/*footer info*/
+
+.info_block {
+	padding: 10px 0 40px 0;
+	margin-bottom: 30px;
+	border-bottom: 1px solid #ceaf70;
+	display: flex;
+	justify-content: center;
+}
+
+.half_sections {
+	width: 50%;
+	display: flex;
+	justify-content: center;
+	vertical-align: top;
+}
+
+.info_block_section {
+	width: 50%;
+	padding: 0 5px;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+}
+.title_info_block {
+	font-size: 12px;
+	font-weight: 500;
+	margin: 0 0 10px;
+	user-select: none;
+}
+.text_info_block {
+	margin: 0 auto;
+	font-size: 13px;
+	font-style: italic;
+	font-weight: 500;
+	font-family: 'Helvetica Neue';
+}
+
+/*footer sections*/
+
+.footer_sections {
+	display: flex;
+}
+
+.footer_col_left {
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+}
+.list_info {
+	padding: 0;
+}
+
+.info_item_list {
+	list-style: none;
+	margin-bottom: 6px;
+	font-size: 14px;
+	font-weight: 100;
+}
+
+.icons_info {
+	display: flex;
+	justify-content: center;
+}
+
+/* footer payment */
+.payment_info {
+	justify-content: space-evenly;
+}
+.payment_icon {
+	margin: 0 2px 0 2px;
+}
+
+.footer_links_title,
+h3 {
+	font-size: 16px;
+	font-weight: 100;
+	letter-spacing: 0.4px;
+}
+
+.footer_bottom {
+	font-size: 12px;
+	display: flex;
+	justify-content: center;
+}
+/* footer bootom*/
+
+.copyright {
+	color: #606060;
+}
+.linkadres {
+	color: #cacaca;
+}
