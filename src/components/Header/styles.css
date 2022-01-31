@@ -76,13 +76,28 @@
 	align-items: center;
 }
 
+.nav_user,
 .nav_cart {
 	margin-right: 20px;
 	cursor: pointer;
+	transform: scale(1.1);
+	-webkit-transform: scale(1.1);
+	-moz-transform: scale(1.1);
+	-ms-transform: scale(1.1);
+	-o-transform: scale(1.1);
+	transition-duration: 200ms;
 }
 
-.nav_login {
-	font-weight: 700;
-	width: 140px;
-	height: 45px;
+.nav_user:active,
+.nav_cart:active {
+	transform: scale(0.9);
+	-webkit-transform: scale(0.9);
+	-moz-transform: scale(0.9);
+	-ms-transform: scale(0.9);
+	-o-transform: scale(0.9);
+	transition-duration: 200ms;
+}
+
+.nav_cart {
+	cursor: pointer;
 }
