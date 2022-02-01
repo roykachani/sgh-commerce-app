@@ -58,6 +58,20 @@
 }
 
 .nav_status {
+	color: whitesmoke;
+	transition: 500ms ease;
+	-webkit-transition: 500ms ease;
+	-moz-transition: 500ms ease;
+	-ms-transition: 500ms ease;
+	-o-transition: 500ms ease;
+}
+.nav_status:hover {
+	color: #606060;
+	transition: 500ms ease;
+	-webkit-transition: 500ms ease;
+	-moz-transition: 500ms ease;
+	-ms-transition: 500ms ease;
+	-o-transition: 500ms ease;
 }
 
 .nav_box2 {
