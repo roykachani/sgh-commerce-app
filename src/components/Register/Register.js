@@ -120,7 +120,7 @@ const Register = () => {
 							{errors.lastname?.message && (
 								<span className="errors_text">{errors.lastname?.message}</span>
 							)}{' '}
-							<button type="submit" className="btn_form">
+							<button type="submit" className="btn_secondary btn_form">
 								Registrarse
 							</button>
 						</form>

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { currencyFormat } from '../../utils/currencyConvert';
+
 const ProductCards = (products) => {
 	const p = products;
 
@@ -10,15 +12,28 @@ const ProductCards = (products) => {
 		setTimeout(() => setState('visible'), 200);
 	}, []);
 
+	const newPrice = () => {
+		return currencyFormat(p.price);
+	};
+
 	return (
 		<div className={`card_item ${state}`}>
 			<div className="card">
 				<div className="card_img">
-					<img src={p.photos[0]} alt={p.title} className="picture" />
+					<Link to={`/product/${p._id}`} className="link_card">
+						<img src={p.photos[0]} alt={p.title} className="picture" />
+					</Link>
 				</div>
 				<div className="card_body">
-					<div className="card_title">{p.title}</div>
-					<div className="card_price">{p.price}</div>
+					<div className="card_text_box">
+						<Link
+							to={`/product/${p._id}`}
+							className="link_card link_card_title"
+						>
+							<p className="card_text card_title">{p.title.toUpperCase()}</p>
+						</Link>
+						<p className="card_text card_price">{newPrice()}</p>
+					</div>
 					<div className="card_btns">
 						<Link to={`/product/${p._id}`}>
 							<button className="btn_secondary btn_card btn_card_secondary">

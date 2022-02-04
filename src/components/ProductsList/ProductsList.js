@@ -39,7 +39,8 @@ const ProductsList = () => {
 		return (
 			<section className="products_container">
 				<div className="text_center">
-					<h1 className="products_cards_title">Productos</h1>
+					<h1 className="products_cards_title">PRODUCTOS</h1>
+					<div className="product_card_box empty"></div>
 				</div>
 			</section>
 		);
@@ -49,7 +50,7 @@ const ProductsList = () => {
 		return (
 			<section className="products_container">
 				<div className="text_center">
-					<h1 className="products_cards_title">Productos</h1>
+					<h1 className="products_cards_title">PRODUCTOS</h1>
 				</div>
 				<div className="products_cards_box">
 					{products.data.map((p) => (
