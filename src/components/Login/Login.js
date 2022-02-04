@@ -63,7 +63,7 @@ const Login = () => {
 			<div className="form_box">
 				<section className="form_ctn_box">
 					<div className="form_title_box">
-						<h2 className="form_title">Ingresar</h2>
+						<h2 className="form_title">Iniciar Sesion</h2>
 					</div>
 					<div className="form_body">
 						<form className="login_form" onSubmit={handleSubmit(submitLogin)}>
@@ -81,7 +81,7 @@ const Login = () => {
 								placeholder="password"
 							/>
 							<span className="errors_text">{errors.password?.message}</span>
-							<button type="submit" className="btn_form">
+							<button type="submit" className="btn_secondary btn_form">
 								Ingresa
 							</button>
 						</form>
