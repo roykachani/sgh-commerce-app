@@ -8,7 +8,7 @@ import {
 export const inicialState = {
 	loading: true,
 	error: false,
-	user: null,
+	userData: null,
 };
 
 export function userReducer(state, action) {
@@ -17,25 +17,25 @@ export function userReducer(state, action) {
 			return {
 				loading: false,
 				error: false,
-				user: action.payload,
+				userData: action.payload,
 			};
 		case POST_ERROR:
 			return {
 				loading: false,
 				error: true,
-				user: action.payload,
+				userData: action.payload,
 			};
 		case FETCH_SUCCESS:
 			return {
 				loading: false,
 				error: false,
-				user: action.payload,
+				userData: action.payload,
 			};
 		case FETCH_ERROR:
 			return {
 				loading: false,
 				error: true,
-				user: null,
+				userData: action.payload,
 			};
 		default:
 			return state;

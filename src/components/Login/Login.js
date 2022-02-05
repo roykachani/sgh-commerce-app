@@ -9,18 +9,14 @@ import { getAuthStorage } from '../../utils/auth';
 
 const Login = () => {
 	const { userState, authenticate } = useContext(AuthContext);
-
 	const history = useHistory();
 
 	//check logged
 	useEffect(() => {
-		const authStorage = getAuthStorage();
-		if (!!userState.user) {
-			if (!!authStorage & (authStorage === userState.user)) {
-				return history.push('/home');
-			}
+		const authStorage = getAuthStorage(); // obtengo token storage
+		if (!!authStorage) {
+			history.push('/');
 		}
-		return history.push('/signin');
 	}, [history, userState]);
 
 	//create object
@@ -34,10 +30,11 @@ const Login = () => {
 
 	const submitLogin = async (data) => {
 		await authenticate(data);
-		if (!!userState.user) {
-			history.push('/home');
-		}
 	};
+
+	if (!!userState.userData) {
+		history.push('/home');
+	}
 
 	return (
 		<>

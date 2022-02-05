@@ -23,7 +23,7 @@ export const DropDownMenu = () => {
 		);
 	};
 
-	if (!!userState.user)
+	if (!!userState.userData) {
 		return (
 			<>
 				<div className="bg_menu" onClick={handlerMenu}>
@@ -33,6 +33,7 @@ export const DropDownMenu = () => {
 				</div>
 			</>
 		);
+	}
 
 	return (
 		<div className="bg_menu" onClick={handlerMenu}>
