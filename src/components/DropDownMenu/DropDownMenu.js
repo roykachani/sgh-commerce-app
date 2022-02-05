@@ -7,7 +7,7 @@ import './styles.css';
 
 export const DropDownMenu = () => {
 	const { state, handlerUser } = useContext(ModalContext);
-	const { auth } = useContext(AuthContext);
+	const { userState } = useContext(AuthContext);
 
 	const handlerMenu = () => {
 		if (!!state.modal) handlerUser();
@@ -23,7 +23,7 @@ export const DropDownMenu = () => {
 		);
 	};
 
-	if (!!auth)
+	if (!!userState.user)
 		return (
 			<>
 				<div className="bg_menu" onClick={handlerMenu}>
