@@ -6,12 +6,14 @@ import { inicialState, userReducer } from '../reducers/user';
 import {
 	getAuthStorage,
 	setAuthStorage,
+	setRespStorage,
+	getRespStorage,
 	removeAuthStorage,
 } from '../utils/auth';
 
 //contexto
 export const AuthContext = createContext({
-	userState: null,
+	userState: inicialState,
 	authenticate: () => {},
 	logout: () => {},
 });
@@ -25,7 +27,8 @@ export const AuthProvider = ({ children }) => {
 	const [post] = usePost();
 
 	useEffect(() => {
-		const authenticatedData = getAuthStorage();
+		const authenticatedData = getRespStorage();
+		const tokenStorage = getAuthStorage();
 		if (!!authenticatedData) {
 			dispatch({ type: POST_SUCCESS, payload: authenticatedData }); //seteo la data del storage
 		}
@@ -48,6 +51,7 @@ export const AuthProvider = ({ children }) => {
 				const { JWT: token } = response.userData;
 				dispatch({ type: POST_SUCCESS, payload: response.userData });
 				setAuthStorage(token);
+				setRespStorage(response.userData);
 			}
 			// console.log(response);
 		} catch (e) {
