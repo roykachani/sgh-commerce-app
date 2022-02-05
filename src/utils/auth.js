@@ -9,14 +9,14 @@ export const getAuthStorage = () => {
 //limpia localStorage
 export const removeAuthStorage = () => {
 	window.localStorage.removeItem('shgauth');
-	// window.localStorage.removeItem('userBlogData');
+	window.localStorage.removeItem('u-dr');
 };
-//set user data response del localstorage
-// export const setRespStorage = (obj) => {
-// 	// window.localStorage.setItem('userBlogData', JSON.stringify(obj));
-// };
+// set user data response del localstorage
+export const setRespStorage = (obj) => {
+	window.localStorage.setItem('u-dr', JSON.stringify(obj));
+};
 
-// //get user data response del localstorage
-// export const getRespStorage = () => {
-// 	// return JSON.parse(window.localStorage.getItem('userBlogData'));
-// };
+//get user data response del localstorage
+export const getRespStorage = () => {
+	return JSON.parse(window.localStorage.getItem('u-dr'));
+};
