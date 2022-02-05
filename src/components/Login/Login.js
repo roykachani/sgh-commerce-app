@@ -15,9 +15,12 @@ const Login = () => {
 	//check logged
 	useEffect(() => {
 		const authStorage = getAuthStorage();
-		if (!!authStorage & (authStorage === userState.user.JWT)) {
-			history.push('/home');
+		if (!!userState.user) {
+			if (!!authStorage & (authStorage === userState.user)) {
+				return history.push('/home');
+			}
 		}
+		return history.push('/signin');
 	}, [history, userState]);
 
 	//create object
