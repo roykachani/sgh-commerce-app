@@ -1,5 +1,8 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useEffect, useReducer } from 'react';
 
+import { usePost } from '../hooks/usePost';
+import { POST_ERROR, POST_SUCCESS } from '../reducers/actions/common';
+import { inicialState, userReducer } from '../reducers/user';
 import {
 	getAuthStorage,
 	setAuthStorage,
@@ -8,7 +11,7 @@ import {
 
 //contexto
 export const AuthContext = createContext({
-	auth: null,
+	userState: null,
 	authenticate: () => {},
 	logout: () => {},
 });
@@ -18,28 +21,46 @@ export const AuthContext = createContext({
 const { Provider } = AuthContext;
 
 export const AuthProvider = ({ children }) => {
-	const [auth, setAuth] = useState(null); //guardo el token
+	const [userState, dispatch] = useReducer(userReducer, inicialState);
+	const [post] = usePost();
 
 	useEffect(() => {
 		const authenticatedData = getAuthStorage();
-		console.log(authenticatedData, 'effect');
 		if (!!authenticatedData) {
-			setAuth(authenticatedData);
+			dispatch({ type: POST_SUCCESS, payload: authenticatedData }); //seteo la data del storage
 		}
 	}, []);
 
-	const authenticate = (response) => {
-		// console.log(response);
-		const { JWT: token } = response.userData;
-		// console.log(token, 'tokennn');
-		setAuth(token);
-		setAuthStorage(token);
+	const authenticate = async (data) => {
+		try {
+			const response = await post(
+				`${process.env.REACT_APP_BACK_ENPOINT_LOG}`,
+				data
+			);
+
+			if (!!response & (response.status === 400)) {
+				dispatch({ type: POST_ERROR, payload: response });
+				throw Error();
+			} else if (!!response & (response.status === 401)) {
+				dispatch({ type: POST_ERROR, payload: response });
+				throw Error();
+			} else if (!!response.userData) {
+				const { JWT: token } = response.userData;
+				dispatch({ type: POST_SUCCESS, payload: response.userData });
+				setAuthStorage(token);
+			}
+			// console.log(response);
+		} catch (e) {
+			console.log(e);
+		}
 	};
 
 	const exit = () => {
-		setAuth(null);
+		dispatch({ type: POST_SUCCESS, payload: null });
 		removeAuthStorage();
 	};
 
-	return <Provider value={{ auth, authenticate, exit }}>{children}</Provider>;
+	return (
+		<Provider value={{ userState, authenticate, exit }}>{children}</Provider>
+	);
 };

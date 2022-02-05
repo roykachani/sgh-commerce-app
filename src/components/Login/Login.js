@@ -1,4 +1,4 @@
-import { useContext, useEffect, useReducer } from 'react';
+import { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useHistory } from 'react-router-dom';
@@ -6,27 +6,19 @@ import { useHistory } from 'react-router-dom';
 import { schema } from './schema';
 import { AuthContext } from '../../context/Auth';
 import { getAuthStorage } from '../../utils/auth';
-import { usePost } from '../../hooks/usePost';
-import { userReducer, inicialState } from '../../reducers/user';
-import {
-	POST_SUCCESS,
-	POSTING,
-	POST_ERROR,
-} from '../../reducers/actions/common';
 
 const Login = () => {
-	const [userState, dispatch] = useReducer(userReducer, inicialState);
-
-	const { authenticate } = useContext(AuthContext);
-
-	const [post] = usePost();
+	const { userState, authenticate } = useContext(AuthContext);
 
 	const history = useHistory();
 
 	//check logged
 	useEffect(() => {
-		if (!!getAuthStorage()) history.push('/home');
-	}, []);
+		const authStorage = getAuthStorage();
+		if (!!authStorage & (authStorage === userState.user.JWT)) {
+			history.push('/home');
+		}
+	}, [history, userState]);
 
 	//create object
 	const {
@@ -38,25 +30,11 @@ const Login = () => {
 	});
 
 	const submitLogin = async (data) => {
-		try {
-			dispatch({ type: POSTING });
-			console.log(data);
-			const response = await post(
-				`${process.env.REACT_APP_BACK_ENPOINT_LOG}`,
-				data
-			);
-			console.log(response);
-			dispatch({ type: POST_SUCCESS, payload: response.userData });
-			authenticate(response);
+		await authenticate(data);
+		if (!!userState.user) {
 			history.push('/home');
-		} catch (e) {
-			dispatch({ type: POST_ERROR });
-			throw Error('error login');
 		}
 	};
-	// if (!!userState) {
-	// 	console.log(userState, 'estado en login');
-	// }
 
 	return (
 		<>
