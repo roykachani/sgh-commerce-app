@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 // import ArrowForward from '../Icons/ArrowForward';
 // import ArrowBack from '../Icons/ArrowBack';
@@ -9,6 +10,7 @@ const ImageSlider = ({ slides }) => {
 	const [current, setCurrent] = useState(0);
 	const length = slides.length;
 
+	const history = useHistory();
 	const nextSlide = () => {
 		setCurrent(current === length - 1 ? 0 : current + 1);
 	};
@@ -18,6 +20,12 @@ const ImageSlider = ({ slides }) => {
 	setTimeout(() => {
 		nextSlide();
 	}, 4000);
+
+	useEffect(() => {
+		return () => {
+			setCurrent(null);
+		};
+	}, [history]);
 
 	return (
 		<>
