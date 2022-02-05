@@ -47,39 +47,27 @@ export default function Footer() {
 								<div className="footer_links">
 									<ul className="list_info">
 										<li className="info_item_list">
-											<Link to="/contacto">
-												<a href="/contacto">Contactanos</a>
-											</Link>
+											<Link to="/contacto">Contactanos</Link>
 										</li>
 										<li className="info_item_list">
 											<Link to="/informacion-de-envios">
-												<a href="/informacion-de-envios">
-													Informacion de Envios
-												</a>
+												Informacion de Envios
 											</Link>
 										</li>
 										<li className="info_item_list">
 											<Link to="/devoluciones-y-cambios">
-												<a href="/devoluciones-y-cambios">
-													Devoluciones y Cambios
-												</a>
+												Devoluciones y Cambios
 											</Link>
 										</li>
 										<li className="info_item_list">
-											<Link to="/seguridad">
-												<a href="/seguridad">Seguridad</a>
-											</Link>
+											<Link to="/seguridad">Seguridad</Link>
 										</li>
 										<li className="info_item_list">
-											<Link to="/FAQs">
-												<a href="/FAQs">FAQs</a>
-											</Link>
+											<Link to="/FAQs">FAQs</Link>
 										</li>
 										<li className="info_item_list">
 											<Link to="/arrepentimineto-de-compra">
-												<a href="/arrepentimineto-de-compra">
-													Arrepentimineto de compra
-												</a>
+												Arrepentimineto de compra
 											</Link>
 										</li>
 									</ul>
@@ -92,27 +80,19 @@ export default function Footer() {
 								<div className="footer_links">
 									<ul className="list_info">
 										<li className="info_item_list">
-											<Link to="/la-empresa">
-												<a href="/la-empresa">La Empresa</a>
-											</Link>
+											<Link to="/la-empresa">La Empresa</Link>
 										</li>
 										<li className="info_item_list">
-											<Link to="/promociones-cavern">
-												<a href="/promociones-cavern">Promociones</a>
-											</Link>
+											<Link to="/promociones-cavern">Promociones</Link>
 										</li>
 										<li className="info_item_list">
 											<Link to="/politicas-de-privacidad">
-												<a href="/politicas-de-privacidad">
-													Politicas de Privacidad
-												</a>
+												Politicas de Privacidad
 											</Link>
 										</li>
 										<li className="info_item_list">
 											<Link to="/terminos-y-condiciones">
-												<a href="/terminos-y-condiciones">
-													Terminos y Condiciones
-												</a>
+												Terminos y Condiciones
 											</Link>
 										</li>
 									</ul>

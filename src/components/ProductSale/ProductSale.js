@@ -18,7 +18,7 @@ export default function ProductsSale() {
 				<div className="cnt_more_products">
 					<div className="btn_box">
 						<Link to="/products" className="btn_secondary btn_sale_box">
-							<a href="/products">Ver mas</a>
+							Ver mas
 						</Link>
 					</div>
 				</div>
@@ -33,7 +33,7 @@ export default function ProductsSale() {
 				<div className="cnt_more_products">
 					<div className="btn_box">
 						<Link to="/products" className="btn_secondary btn_sale_box">
-							<a href="/products">Ver mas</a>
+							Ver mas
 						</Link>
 					</div>
 				</div>
