@@ -1,39 +1,18 @@
-import { useReducer, useEffect } from 'react';
-import { FETCHING, FETCH_SUCCESS } from '../../reducers/actions/common';
+import { useEffect, useContext, useCallback } from 'react';
+import { ProductsContext } from '../../context/Products';
 
-import { productsReducer, inicialState } from '../../reducers/products';
 import ProductCards from '../productCards/productCards';
-import { useFetch } from './../../hooks/useFetch';
 
 const ProductsList = () => {
-	const [state, dispatch] = useReducer(productsReducer, inicialState);
+	const { state, getAllProducts } = useContext(ProductsContext);
 
-	const [getData] = useFetch();
-
-	const getProducts = async () => {
-		try {
-			dispatch({ type: FETCHING });
-			const result = await getData(
-				`${process.env.REACT_APP_BACK_FETCH_PRODUCTS}`
-			);
-			// console.log(result.status, 'getproducts');
-
-			if (!!result & (result.status === (404 | 500))) {
-				dispatch({ type: FETCHING, payload: result });
-				//redirect
-				throw Error();
-			}
-			console.log(result, 'succes getproducts');
-			dispatch({ type: FETCH_SUCCESS, payload: result });
-		} catch (e) {
-			console.log(e);
-		}
-	};
+	const getProducts = useCallback(async () => {
+		await getAllProducts();
+	}, [getAllProducts]);
 
 	useEffect(() => {
-		getProducts();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+		if (!state.products) getProducts();
+	}, [getProducts, state]);
 
 	if (state.loading === true)
 		return (
@@ -41,6 +20,16 @@ const ProductsList = () => {
 				<div className="text_center">
 					<h1 className="products_cards_title">PRODUCTOS</h1>
 					<div className="product_card_box empty"></div>
+				</div>
+			</section>
+		);
+
+	if (state.products.status === (404 | 500))
+		return (
+			<section className="products_container">
+				<div className="text_center">
+					<h1 className="products_cards_title">PRODUCTOS</h1>
+					<div className="product_card_box empty">upps! Algo salio mal..</div>
 				</div>
 			</section>
 		);
