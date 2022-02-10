@@ -11,6 +11,7 @@ import Product from '../views/Product/Product';
 import Signin from '../views/SignIn/Signin';
 import Signup from '../views/Signup/Signup';
 import Header from '../components/Header/Header';
+import AccounteCreate from '../views/AccounteCreate/AccounteCreate';
 
 const AppRouter = () => {
 	return (
@@ -21,6 +22,11 @@ const AppRouter = () => {
 				<Route path="/home" exact component={Home} />
 				<Route path="/signin" component={Signin} />
 				<Route path="/signup" component={Signup} />
+				<Route path="/accounteCreate" component={AccounteCreate} />
+				<Route
+					path="/accounteCreate/:verificationCode"
+					component={AccounteCreate} //desarrollar
+				/>
 				<Route path="/products" component={Products} />
 				<Route path="/product/:id" component={Product} />
 				<Redirect to="/" />
