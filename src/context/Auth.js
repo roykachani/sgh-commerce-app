@@ -34,12 +34,9 @@ export const AuthProvider = ({ children }) => {
 		}
 	}, []);
 
-	const authenticate = async (data) => {
+	const authenticate = async (endpoint, data) => {
 		try {
-			const response = await post(
-				`${process.env.REACT_APP_BACK_ENPOINT_LOG}`,
-				data
-			);
+			const response = await post(endpoint, data);
 
 			if (!!response & (response.status === 400)) {
 				dispatch({ type: POST_ERROR, payload: response });
@@ -52,6 +49,10 @@ export const AuthProvider = ({ children }) => {
 				dispatch({ type: POST_SUCCESS, payload: response.userData });
 				setAuthStorage(token);
 				setRespStorage(response.userData);
+				return response;
+			} else if (!!response & (response.status === 201)) {
+				dispatch({ type: POST_SUCCESS, payload: response });
+				return response;
 			}
 			// console.log(response);
 		} catch (e) {
