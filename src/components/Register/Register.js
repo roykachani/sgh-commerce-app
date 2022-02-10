@@ -1,29 +1,20 @@
-import { useContext, useEffect, useReducer, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useHistory } from 'react-router-dom';
 
 import { schema } from './schema';
 import { getAuthStorage } from '../../utils/auth';
-import { usePost } from '../../hooks/usePost';
-import { userReducer, inicialState } from '../../reducers/user';
-import {
-	POST_SUCCESS,
-	POSTING,
-	POST_ERROR,
-} from '../../reducers/actions/common';
+import { AuthContext } from '../../context/Auth';
 
 const Register = () => {
-	const [userState, dispatch] = useReducer(userReducer, inicialState);
-
-	const [post] = usePost();
-
+	const { userState, authenticate, exit } = useContext(AuthContext);
 	const history = useHistory();
 
 	//check logged
 	useEffect(() => {
 		if (!!getAuthStorage()) history.push('/home');
-	}, []);
+	}, [history, userState]);
 
 	//create object
 	const {
@@ -35,28 +26,16 @@ const Register = () => {
 	});
 
 	const submitRegister = async (data) => {
-		try {
-			dispatch({ type: POSTING });
-			console.log(data);
-			const response = await post(
-				`${process.env.REACT_APP_BACK_ENDPIONT_REGIST}`,
-				data
-			);
-			if (response.status === 400) {
-				console.log(response);
-				dispatch({ type: POST_ERROR, payload: response });
-				throw Error();
-			}
-			console.log(response);
-			dispatch({ type: POST_SUCCESS, payload: response });
-			history.push('/home');
-		} catch (e) {
-			console.log(e);
-		}
+		await authenticate(`${process.env.REACT_APP_BACK_ENDPIONT_REGIST}`, data);
 	};
-	// if (!!userState) {
-	// 	console.log(userState, 'estado en login');
-	// }
+	console.log(userState);
+
+	if (!!userState.userData & (userState.userData?.status === 201)) {
+		setTimeout(() => {
+			history.push('/accounteCreate');
+			exit();
+		}, 400);
+	}
 
 	return (
 		<>
@@ -79,8 +58,10 @@ const Register = () => {
 							{errors.email?.message && (
 								<span className="errors_text">{errors.email?.message}</span>
 							)}
-							{userState.user?.status === 400 && (
-								<span className="errors_text">{userState.user.message}</span>
+							{userState.userData?.status === 400 && (
+								<span className="errors_text">
+									{userState.userData.message}
+								</span>
 							)}
 							<input
 								{...register('password')}
