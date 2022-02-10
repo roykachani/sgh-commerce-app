@@ -54,7 +54,6 @@ export default function Header() {
 							<div className="nav_cart">
 								<BagIcon />
 							</div>
-							{/* <div className="btn_secondary nav_login">Registar/Ingresar</div> */}
 						</div>
 					</div>
 				</div>
