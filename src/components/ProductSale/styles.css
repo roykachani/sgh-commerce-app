@@ -8,6 +8,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	align-items: center;
 	margin-bottom: 55px;
 }
 
@@ -25,13 +26,16 @@
 }
 
 .cnt_cards {
-	width: 100%;
-	height: 450px;
+	width: 90%;
+	height: 650px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 .box_product_cards {
 	padding-top: 40px;
 	width: auto;
-	height: 407px;
+	height: 600px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -56,4 +60,71 @@ a {
 	text-decoration: none;
 	color: inherit;
 	font-weight: 500;
+}
+
+/* banners*/
+
+.container_access_link {
+	margin-bottom: 30px;
+	width: auto;
+	height: 350px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #121212;
+}
+
+.box_access_link {
+	width: 80%;
+	height: 70%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.banners_access_link {
+	width: 95%;
+	height: 80%;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.access_link {
+	width: 30%;
+	height: 85%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.access_link_img1 {
+	width: 100%;
+	height: 100%;
+	background-image: url('./../../assets/bence-balla-schottner.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.access_link_img2 {
+	width: 100%;
+	height: 100%;
+	background-image: url('./../../assets/jakub-balon.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.access_link_img3 {
+	width: 100%;
+	height: 100%;
+	background-image: url('./../../assets/philip-wahl.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.img_link_box {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.banner_link_title {
+	font-size: 38px;
 }
