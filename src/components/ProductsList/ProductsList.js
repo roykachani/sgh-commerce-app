@@ -34,7 +34,6 @@ const ProductsList = () => {
 			</section>
 		);
 	else if (!!state) {
-		console.log(state.products.data, 'datita');
 		const { products } = state;
 		return (
 			<section className="products_container">
