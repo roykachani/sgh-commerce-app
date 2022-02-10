@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import InstaIcon from '../Icons/InstaIcon';
 import MasterIcon from '../Icons/MasterIcon';
@@ -9,7 +9,7 @@ import CardIcon from '../Icons/payment/CardsIcon';
 
 import './styles.css';
 
-export default function Footer() {
+export default memo(function Footer() {
 	return (
 		<>
 			<div className="footer_container">
@@ -149,4 +149,4 @@ export default function Footer() {
 			</div>
 		</>
 	);
-}
+});
