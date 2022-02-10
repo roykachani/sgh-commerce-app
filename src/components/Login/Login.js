@@ -13,7 +13,7 @@ const Login = () => {
 
 	//check logged
 	useEffect(() => {
-		const authStorage = getAuthStorage(); // obtengo token storage
+		const authStorage = getAuthStorage();
 		if (!!authStorage) {
 			history.push('/');
 		}
@@ -29,10 +29,10 @@ const Login = () => {
 	});
 
 	const submitLogin = async (data) => {
-		await authenticate(data);
+		await authenticate(`${process.env.REACT_APP_BACK_ENPOINT_LOG}`, data);
 	};
 
-	if (!!userState.userData) {
+	if (!!userState.userData & userState.userData?.JWT) {
 		history.push('/home');
 	}
 
