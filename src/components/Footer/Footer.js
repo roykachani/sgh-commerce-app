@@ -138,7 +138,7 @@ export default memo(function Footer() {
 				<p className="copyright">
 					2022 CAVERN © - Hecho por{' '}
 					<a
-						href="https://roykachani.vercel.app"
+						href="https://roykachani.com"
 						target="_blank"
 						rel="noreferrer"
 						className="linkadres"
