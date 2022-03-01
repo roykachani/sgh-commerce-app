@@ -1,2 +1,8 @@
-export const MODAL_OPEN = 'MODAL_OPEN';
-export const MODAL_CLOSE = 'MODAL_CLOSE';
+export const MODAL_USER_OPEN = 'MODAL_USER_OPEN';
+export const MODAL_USER_CLOSE = 'MODAL_USER_CLOSE';
+
+export const MODAL_CART_OPEN = 'MODAL_CART_OPEN';
+export const MODAL_CART_CLOSE = 'MODAL_CART_CLOSE';
+
+export const MODAL_SIZES_OPEN = 'MODAL_SIZES_OPEN';
+export const MODAL_SIZES_CLOSE = 'MODAL_SIZES_CLOSE';
