@@ -1,117 +1,115 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ModalContext } from '../../context/Modal';
 
 import { currencyFormat } from '../../utils/currencyConvert';
+import AddCartBtn from '../buttons/AddCartBtn';
+import CartSizesBtn from '../buttons/CartSizesBtn';
 import './styles.css';
 
-const ProductCards = (products) => {
-	const p = products;
+const ProductCards = ({
+	_id,
+	title,
+	photos,
+	price,
+	sizes,
+	modalId,
+	showModal,
+	classSale,
+}) => {
+	const [classState, setclassState] = useState('hidden');
+	const { state } = useContext(ModalContext);
 
-	const [state, setState] = useState('hidden');
+	const [selectSizeState, setSelectSizeState] = useState(false); //handler size select
+	const [idSize, setIdSize] = useState(null); // size id
+
+	let sizeKey;
+	let sizeStockValue;
+	let idModal = _id;
+
+	/* manejo de sizes*/
+	const handlerSize = (e) => {
+		setIdSize(e.target.id);
+		setSelectSizeState(true);
+	};
 
 	useEffect(() => {
-		setTimeout(() => setState('visible'), 200);
+		setTimeout(() => setclassState('visible'), 200);
 	}, []);
 
 	const newPrice = () => {
-		return currencyFormat(p.price);
+		return currencyFormat(price);
 	};
 
-	if (p?.condition === 'offer') {
-		return (
-			<div className={`card_item ${state}`}>
-				<div className="card">
-					<div className="card_img">
-						<Link to={`/product/${p._id}`} className="link_card">
-							<img src={p.photos[0]} alt={p.title} className="picture" />
-						</Link>
-					</div>
-					<div className="card_body">
-						<div className="card_text_box">
-							<Link
-								to={`/product/${p._id}`}
-								className="link_card link_card_title"
-							>
-								<p className="card_text card_title">{p.title.toUpperCase()}</p>
-							</Link>
-							<p className="card_text card_price">{newPrice()}</p>
-						</div>
-						<div className="card_btns">
-							<Link to={`/product/${p._id}`}>
-								<button className="btn_secondary btn_card btn_card_secondary">
-									ver producto
-								</button>
-							</Link>
-							<button className="btn_primary btn_card btn_card_primary">
-								agregar +
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		);
-	}
-	if (p?.condition === 'new') {
-		return (
-			<div className={`card_item ${state}`}>
-				<div className="card">
-					<div className="card_img">
-						<Link to={`/product/${p._id}`} className="link_card">
-							<img src={p.photos[0]} alt={p.title} className="picture" />
-						</Link>
-					</div>
-					<div className="card_body">
-						<div className="card_text_box">
-							<Link
-								to={`/product/${p._id}`}
-								className="link_card link_card_title"
-							>
-								<p className="card_text card_title">{p.title.toUpperCase()}</p>
-							</Link>
-							<p className="card_text card_price">{newPrice()}</p>
-						</div>
-						<div className="card_btns">
-							<Link to={`/product/${p._id}`}>
-								<button className="btn_secondary btn_card btn_card_secondary">
-									ver producto
-								</button>
-							</Link>
-							<button className="btn_primary btn_card btn_card_primary">
-								agregar +
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		);
-	}
 	return (
-		<div className={`card_item ${state}`}>
+		<div className={`card_item ${classState}`}>
 			<div className="card">
 				<div className="card_img">
-					<Link to={`/product/${p._id}`} className="link_card">
-						<img src={p.photos[0]} alt={p.title} className="picture" />
+					<Link to={`/products/${_id}/${title}`} className="link_card">
+						<img src={photos[0]} alt={title} className="picture" />
 					</Link>
+				</div>
+				<div
+					id={idModal}
+					className={
+						!!state.modalSizes & (modalId == idModal)
+							? 'size_cnt_list sizes_open'
+							: 'size_cnt_list'
+					}
+				>
+					<div className="box_stock">
+						{sizes.map((s, index) => {
+							[sizeKey] = Object.keys(s);
+							[sizeStockValue] = Object.values(s);
+							return (
+								<div
+									id={index}
+									onClick={handlerSize}
+									key={Math.random()}
+									className={[
+										`${sizeStockValue > 0 ? 'stock' : 'disabled_size'}`,
+										`${
+											// eslint-disable-next-line eqeqeq
+											!!selectSizeState &
+											(idSize == index) &
+											(sizeStockValue > 0)
+												? 'selected_size'
+												: ''
+										}`,
+									].join(' ')}
+								>
+									{sizeKey}
+								</div>
+							);
+						})}
+					</div>
+					<div className="btn_cnt_product">
+						<AddCartBtn
+							_id={_id}
+							idSize={idSize}
+							price={price}
+							title={title}
+							sizes={sizes}
+							photos={photos}
+						/>
+					</div>
 				</div>
 				<div className="card_body">
 					<div className="card_text_box">
-						<Link
-							to={`/product/${p._id}`}
-							className="link_card link_card_title"
-						>
-							<p className="card_text card_title">{p.title.toUpperCase()}</p>
+						<Link to={`/product/${_id}`} className="link_card link_card_title">
+							<p className="card_text card_title">{title.toUpperCase()}</p>
 						</Link>
 						<p className="card_text card_price">{newPrice()}</p>
 					</div>
 					<div className="card_btns">
-						<Link to={`/product/${p._id}`}>
+						<Link to={`/products/${_id}/${title}`}>
 							<button className="btn_secondary btn_card btn_card_secondary">
 								ver producto
 							</button>
 						</Link>
-						<button className="btn_primary btn_card btn_card_primary">
-							agregar +
-						</button>
+						{!classSale && (
+							<CartSizesBtn id={_id} modalId={modalId} showModal={showModal} />
+						)}
 					</div>
 				</div>
 			</div>
