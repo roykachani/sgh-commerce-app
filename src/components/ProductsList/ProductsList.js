@@ -1,10 +1,16 @@
-import { useEffect, useContext, useCallback } from 'react';
+import { useEffect, useContext, useCallback, useState } from 'react';
 import { ProductsContext } from '../../context/Products';
 
 import ProductCards from '../productCards/productCards';
+import AsideCategories from '../AsideCategories/AsideCategories';
 
 const ProductsList = () => {
 	const { state, getAllProducts } = useContext(ProductsContext);
+
+	const [modalId, setModalId] = useState(null); //handler unique modal
+	const showModal = (id) => {
+		setModalId(id);
+	};
 
 	const getProducts = useCallback(async () => {
 		await getAllProducts();
@@ -19,7 +25,7 @@ const ProductsList = () => {
 			<section className="products_container">
 				<div className="text_center">
 					<h1 className="products_cards_title">PRODUCTOS</h1>
-					<div className="product_card_box empty"></div>
+					<div className="product_card_box empty">Cargando...</div>
 				</div>
 			</section>
 		);
@@ -40,10 +46,20 @@ const ProductsList = () => {
 				<div className="text_center">
 					<h1 className="products_cards_title">PRODUCTOS</h1>
 				</div>
-				<div className="products_cards_box">
-					{products.data.map((p) => (
-						<ProductCards key={p._id} {...p} />
-					))}
+				<div className="cnt_products">
+					<aside className="category_aside">
+						<AsideCategories />
+					</aside>
+					<div className="products_cards_box product_section">
+						{products.data.map((p, index) => (
+							<ProductCards
+								key={index}
+								modalId={modalId}
+								showModal={showModal}
+								{...p}
+							/>
+						))}
+					</div>
 				</div>
 			</section>
 		);
