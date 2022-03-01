@@ -1,14 +1,23 @@
-import React, { useCallback, useContext, useEffect } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ProductsContext } from '../../context/Products';
 import ProductCards from '../productCards/productCards';
-import { getRandoms } from '../../utils/randomProducts';
+import { useGetRandoms } from '../../hooks/useRandomProducts';
 import './styles.css';
 
 export default function ProductsSale() {
 	const { state, getAllProducts } = useContext(ProductsContext);
-	const conditiontype = { offer: 'offer', newIn: 'new in' };
-	const [randomProducts] = getRandoms();
+
+	const [modalId, setModalId] = useState(null); //handler unique modal
+	const [classSale, setClassSale] = useState(true);
+
+	const showModal = (id) => {
+		setModalId(id);
+	};
+
+	const [randomProducts] = useGetRandoms();
+
+	const conditiontype = { offer: 'offer', newIn: 'new in', new: 'new' };
 
 	const getProducts = useCallback(async () => {
 		await getAllProducts();
@@ -20,7 +29,10 @@ export default function ProductsSale() {
 
 	const { products } = state;
 
-	const randoms = (condition, length = products.data.length) => {
+	const randoms = (
+		condition = conditiontype.new,
+		length = products.data.length
+	) => {
 		if (state?.products) {
 			const result = randomProducts(products, condition, length);
 			return result;
@@ -39,7 +51,13 @@ export default function ProductsSale() {
 						{state?.products && (
 							<div className="products_cards_box">
 								{randoms(conditiontype.newIn, 3).map((p) => (
-									<ProductCards key={p._id} {...p} />
+									<ProductCards
+										key={p._id}
+										modalId={modalId}
+										showModal={showModal}
+										classSale={classSale}
+										{...p}
+									/>
 								))}
 							</div>
 						)}
@@ -56,17 +74,17 @@ export default function ProductsSale() {
 			<div className="container_access_link">
 				<div className="box_access_link">
 					<div className="banners_access_link">
-						<Link className="access_link" to="/products/jeans">
+						<Link className="access_link" to="/products/categories/jeans">
 							<div className="access_link_img1 img_link_box">
 								<h3 className="banner_link_title">Jeans</h3>
 							</div>
 						</Link>
-						<Link className="access_link" to="/products/camisas">
+						<Link className="access_link" to="/products/categories/camisas">
 							<div className="access_link_img2 img_link_box">
 								<h3 className="banner_link_title">Camisas</h3>
 							</div>
 						</Link>
-						<Link className="access_link" to="/products/accesorios">
+						<Link className="access_link" to="/products/categories/accesorios">
 							<div className="access_link_img3 img_link_box">
 								<h3 className="banner_link_title">Accesorios</h3>
 							</div>
@@ -83,7 +101,13 @@ export default function ProductsSale() {
 						{state?.products && (
 							<div className="products_cards_box">
 								{randoms(conditiontype.offer, 4).map((p) => (
-									<ProductCards key={p._id} {...p} />
+									<ProductCards
+										key={p._id}
+										modalId={modalId}
+										showModal={showModal}
+										classSale={classSale}
+										{...p}
+									/>
 								))}
 							</div>
 						)}
