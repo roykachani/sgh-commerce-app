@@ -24,6 +24,7 @@ export const CartContext = createContext({
 	cartState: inicialState,
 	addItem: () => {},
 	removeItem: () => {},
+	handlerMessages: () => {},
 	addAdress: () => {},
 	removeAdress: () => {},
 	addPayMethod: () => {},
