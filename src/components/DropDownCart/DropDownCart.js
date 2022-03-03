@@ -1,4 +1,12 @@
-import { memo, useContext, useMemo } from 'react';
+import {
+	memo,
+	useCallback,
+	useContext,
+	useEffect,
+	useMemo,
+	useState,
+} from 'react';
+import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 import { AuthContext } from '../../context/Auth';
@@ -10,9 +18,12 @@ import ProductsCart from '../ProductsCart/ProductsCart';
 import './styles.css';
 
 export const DropDownCart = memo(() => {
-	const { cartState } = useContext(CartContext);
+	const { cartState, handlerMessages } = useContext(CartContext);
 	const { state, handlerCart } = useContext(ModalContext);
 	const { userState } = useContext(AuthContext);
+	const [hiddenclass, setHiddenclass] = useState(null);
+
+	const history = useHistory();
 
 	const { cartProducts } = cartState;
 
@@ -27,6 +38,24 @@ export const DropDownCart = memo(() => {
 	const newPrice = () => {
 		return currencyFormat(total);
 	};
+
+	useEffect(() => {
+		if (!!hiddenclass) setTimeout(() => setHiddenclass(null), 3000);
+	}, [hiddenclass]);
+
+	const handleCheckout = useCallback(() => {
+		if (cartProducts.length === 0) {
+			handlerMessages('No hay productos en el carrito');
+
+			return setHiddenclass(true);
+		} else if (!userState.userData) {
+			handlerMessages('Debes Iniciar Sesión o Regístrate');
+			return setHiddenclass(true);
+		} else {
+			history.push('/cvn/checkout/cart');
+			handlerMenu();
+		}
+	});
 
 	return (
 		<div
@@ -72,12 +101,28 @@ export const DropDownCart = memo(() => {
 							<input type="checkbox" name="privado" />
 							<input type="checkbox" name="retiro" />
 							<div className="btn_center_box">
-								<Link
-									className="btn_secondary checkout_cart"
-									to="/cvn/checkout/cart"
+								<button
+									onClick={handleCheckout}
+									type="button"
+									className={
+										!!userState.userData & (cartProducts.length >= 1)
+											? 'btn_secondary checkout_cart'
+											: 'btn_secondary checkout_cart btn_disabled'
+									}
 								>
 									CHECKOUT
-								</Link>
+								</button>
+								{!!cartState.messages && (
+									<span
+										className={
+											!!hiddenclass
+												? 'message_description_info_sp'
+												: 'message_description_info_sp hidden_stock_msg'
+										}
+									>
+										{cartState.messages}
+									</span>
+								)}
 							</div>
 						</div>
 					</div>
