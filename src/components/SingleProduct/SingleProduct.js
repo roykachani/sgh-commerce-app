@@ -1,6 +1,7 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
-import { CartContext } from '../../context/Cart';
+import { useHistory } from 'react-router-dom';
 
+import { CartContext } from '../../context/Cart';
 import { ProductsContext } from '../../context/Products';
 import { useCheckoutItem } from '../../hooks/useCheckoutItem';
 import { currencyFormat } from '../../utils/currencyConvert';
@@ -14,6 +15,9 @@ const SingleProduct = ({ paramId, path }) => {
 	const [sizeSelected, setSizeSelected] = useState(null);
 
 	const [checkCartItem] = useCheckoutItem();
+	const history = useHistory();
+
+	const shippingPrice = 400;
 
 	const getProducts = useCallback(async () => {
 		await getAllProducts();
@@ -27,8 +31,13 @@ const SingleProduct = ({ paramId, path }) => {
 		if (!state.products) getProducts();
 	}, [getProducts, state]);
 	useEffect(() => {
-		if (!!hiddenclass) setTimeout(() => setHiddenclass(false), 3000);
+		if (!!hiddenclass) setTimeout(() => setHiddenclass(null), 3000);
 	}, [hiddenclass]);
+	useEffect(() => {
+		return () => {
+			setHiddenclass(null);
+		};
+	}, [history]);
 
 	if (state.loading === true)
 		return (
@@ -65,9 +74,10 @@ const SingleProduct = ({ paramId, path }) => {
 
 		const handlerItem = () => {
 			const [sizeStockSelected] = item.sizes.filter(
-				(s) => Object.keys(s) == sizeSelected
+				(s) => s.size === sizeSelected
 			);
-			[stockSize] = Object.values(sizeStockSelected);
+			stockSize = sizeStockSelected.stock;
+
 			const itemCart = {
 				id: item._id,
 				size: sizeSelected,
@@ -76,6 +86,7 @@ const SingleProduct = ({ paramId, path }) => {
 				addQuantity: 1,
 				stock: stockSize,
 				photos: item.photos,
+				SKU: item.SKU,
 			};
 			checkCartItem(itemCart);
 			setHiddenclass(true);
@@ -148,18 +159,18 @@ const SingleProduct = ({ paramId, path }) => {
 													Selecciona una opcion...
 												</option>
 												{item.sizes.map((s, index) => {
-													[sizeKey] = Object.keys(s);
-													[sizeStockValue] = Object.values(s);
+													sizeKey = s.size;
+													sizeStockValue = s.stock;
 													return (
 														<option
 															key={index}
 															className={
-																sizeStockValue == 0
+																sizeStockValue === 0
 																	? 'option_value_disabled'
 																	: ''
 															}
 															value={sizeKey}
-															disabled={sizeStockValue == 0 && true}
+															disabled={sizeStockValue === 0 && true}
 														>
 															{sizeKey}
 														</option>
@@ -208,7 +219,7 @@ const SingleProduct = ({ paramId, path }) => {
 											<p className="shipping_description_info">
 												Válido para pedidos en CABA y AMBA. . Los paquetes los
 												enviamos a través de nuestro operador logistico privado
-												con un costo de $350.
+												con un costo de ${shippingPrice}.
 											</p>
 											<p className="shipping_description_info title_sp_shippng">
 												Retiro en el local

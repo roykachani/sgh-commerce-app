@@ -1,4 +1,4 @@
-import { createContext, useEffect, useReducer } from 'react';
+import { createContext, useEffect, useReducer, useState } from 'react';
 
 import { usePost } from '../hooks/usePost';
 import { POST_ERROR, POST_SUCCESS } from '../reducers/actions/common';
@@ -23,12 +23,18 @@ export const AuthContext = createContext({
 const { Provider } = AuthContext;
 
 export const AuthProvider = ({ children }) => {
+	const [tokenState, setTopkenSatate] = useState(null);
 	const [userState, dispatch] = useReducer(userReducer, inicialState);
 	const [post] = usePost();
+	console.log(userState, 'auth');
 
 	useEffect(() => {
 		const authenticatedData = getRespStorage();
 		const tokenStorage = getAuthStorage();
+
+		if (!!tokenStorage) {
+			setTopkenSatate(tokenStorage);
+		}
 		if (!!authenticatedData) {
 			dispatch({ type: POST_SUCCESS, payload: authenticatedData }); //seteo la data del storage
 		}
@@ -66,6 +72,8 @@ export const AuthProvider = ({ children }) => {
 	};
 
 	return (
-		<Provider value={{ userState, authenticate, exit }}>{children}</Provider>
+		<Provider value={{ userState, authenticate, exit, tokenState }}>
+			{children}
+		</Provider>
 	);
 };
