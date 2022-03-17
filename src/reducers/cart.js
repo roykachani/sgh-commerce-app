@@ -7,16 +7,21 @@ import {
 	REMOVE_ADRESS_CART,
 	ADD_CART_STORAGE,
 	CHANGE_QUANTITY_CART,
+	SET_TOTALCART,
 	MESSAGES_CART,
 	DELETE_CART,
 	FINISHED_CART,
+	LOADING_TRUE,
+	LOADING_FALSE,
 } from './actions/cart';
 
 export const inicialState = {
 	cartProducts: [],
-	shippinAdres: null,
+	shippingAdress: [],
 	paymentMethod: null,
 	cartFinished: false,
+	totalCart: null,
+	loading: true,
 	messages: null,
 };
 
@@ -26,7 +31,7 @@ export function cartReducer(state = inicialState, action) {
 			return {
 				...inicialState,
 				cartProducts: action.payload.cartProducts,
-				shippinAdres: action.payload.adress,
+				shippingAdress: action.payload.adress,
 				cartFinished: false,
 			};
 		case ADD_ITEM_CART:
@@ -49,25 +54,41 @@ export function cartReducer(state = inicialState, action) {
 				...state,
 				messages: action.payload,
 			};
+		case LOADING_TRUE:
+			return {
+				...state,
+				loading: true,
+			};
+		case LOADING_FALSE:
+			return {
+				...state,
+				loading: false,
+			};
 		case ADD_ADRESS_CART:
 			return {
 				...state,
-				shippinAdres: action.payload,
+				shippingAdress: action.payload,
 			};
 		case REMOVE_ADRESS_CART:
 			return {
 				...state,
-				shippinAdres: action.payload,
+				shippingAdress: action.payload,
 			};
+		case SET_TOTALCART:
+			return {
+				...state,
+				totalCart: action.payload,
+			};
+
 		case ADD_PAYMENTM_CART:
 			return {
 				...state,
-				shippinAdres: action.payload,
+				paymentMethod: action.payload,
 			};
 		case REMOVE_PAYMENTM_CART:
 			return {
 				...state,
-				shippinAdres: action.payload,
+				paymentMethod: action.payload,
 			};
 		case FINISHED_CART:
 			return {

@@ -13,12 +13,16 @@ import {
 	MESSAGES_CART,
 	CHANGE_QUANTITY_CART,
 	FINISHED_CART,
+	SET_TOTALCART,
+	LOADING_TRUE,
+	LOADING_FALSE,
 } from '../reducers/actions/cart';
 import {
 	setCartStorage,
 	getCartStorage,
 	removeCartStorage,
 } from '../utils/cartStorage';
+import { usePost } from '../hooks/usePost';
 
 export const CartContext = createContext({
 	cartState: inicialState,
@@ -27,6 +31,7 @@ export const CartContext = createContext({
 	handlerMessages: () => {},
 	addAdress: () => {},
 	removeAdress: () => {},
+	setLoading: () => {},
 	addPayMethod: () => {},
 	removePayMethod: () => {},
 	payCart: () => {},
@@ -38,6 +43,8 @@ const { Provider } = CartContext;
 export const CartProvider = ({ children }) => {
 	const [cartState, dispatch] = useReducer(cartReducer, inicialState);
 	const { cartProducts } = cartState;
+
+	const [postData] = usePost();
 
 	// useEffect(() => {
 	// 	const cartStorage = getCartStorage();
@@ -71,9 +78,33 @@ export const CartProvider = ({ children }) => {
 		console.log(payload, 'payload removeADRESS');
 		dispatch({ type: REMOVE_ADRESS_CART, payload: payload });
 	};
+	const totalCart = (payload) => {
+		console.log(payload, 'payload totalcartsett');
 
-	const addPayMethod = (payload) => {
-		dispatch({ type: ADD_PAYMENTM_CART, payload: payload });
+		dispatch({ type: SET_TOTALCART, payload: payload });
+	};
+	const setLoading = () => {
+		dispatch({ type: LOADING_TRUE });
+		setTimeout(() => {
+			dispatch({ type: LOADING_FALSE });
+		}, 1000);
+	};
+	const addPayMethod = async (obj, config) => {
+		try {
+			// const data = await postData('purchase/', obj, config);
+			const data = await postData('checkout', obj, config);
+			console.log(data);
+			dispatch({ type: ADD_PAYMENTM_CART, payload: data });
+			if (data?.status === 401) {
+				dispatch({ type: ADD_PAYMENTM_CART, payload: data });
+			}
+			if (data?.status === 201) {
+				dispatch({ type: ADD_PAYMENTM_CART, payload: data });
+			}
+			console.log('dataok');
+		} catch (e) {
+			console.log(e);
+		}
 	};
 
 	const removePayMethod = (payload) => {
@@ -104,6 +135,8 @@ export const CartProvider = ({ children }) => {
 				handlerMessages,
 				deleteCart,
 				handlerQuantity,
+				totalCart,
+				setLoading,
 			}}
 		>
 			{children}
