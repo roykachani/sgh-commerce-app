@@ -1,14 +1,16 @@
-import { useContext } from 'react';
-import CheckoutList from '../../components/CheckoutList/CheckoutList';
-import Footer from '../../components/Footer/Footer';
+import { useContext, useEffect } from 'react';
+
 import { ModalContext } from '../../context/Modal';
+import PaymentsCheckout from '../../components/PaymentsCheckout/PaymentsCheckout';
+import Footer from '../../components/Footer/Footer';
 
 import './styles.css';
 
-const Checkout = ({ match }) => {
+const CheckoutShipping = () => {
 	const { state, handlerUser, handlerCart } = useContext(ModalContext);
-	// const paramId = match.params.id;
-	// const path = match.path;
+	useEffect(() => {
+		if (state.modalCart === true) handlerCart();
+	}, [state, handlerCart]);
 
 	const handlerMenu = () => {
 		if (!!state.modalCart) handlerCart();
@@ -19,7 +21,7 @@ const Checkout = ({ match }) => {
 		<>
 			<main onClick={handlerMenu} className="main_container">
 				<section className="products_main_container">
-					<CheckoutList />
+					<PaymentsCheckout />
 				</section>
 				<Footer />
 			</main>
@@ -27,4 +29,4 @@ const Checkout = ({ match }) => {
 	);
 };
 
-export default Checkout;
+export default CheckoutShipping;

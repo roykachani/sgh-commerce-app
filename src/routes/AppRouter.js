@@ -16,6 +16,8 @@ import Category from '../views/Products/Category';
 import PrivateRoute from './PrivateRoute';
 import Checkout from '../views/Checkout/Checkout';
 import Loader from '../components/Loader/Loader';
+import CheckoutShipping from '../views/CheckoutShipping/CheckoutShipping';
+import PaymentsCheckout from '../views/Payments/Payments';
 
 const AppRouter = () => {
 	return (
@@ -40,7 +42,26 @@ const AppRouter = () => {
 				/>
 				<Route path="/products/:id/:title" exact component={Product} />
 				<PrivateRoute exact path="/cvn/checkout/cart" component={Checkout} />
-				<PrivateRoute exact path="/cvn/checkout/onepage" component={Checkout} />
+				<PrivateRoute
+					exact
+					path="/cvn/checkout/onepage"
+					component={CheckoutShipping}
+				/>
+				<PrivateRoute
+					exact
+					path="/cvn/checkout/index"
+					component={PaymentsCheckout}
+				/>
+				<PrivateRoute
+					exact
+					path="/user/myProfile/index"
+					component={PaymentsCheckout}
+				/>
+				<PrivateRoute
+					exact
+					path="/user/lastshopping/index"
+					component={PaymentsCheckout}
+				/>
 				<Redirect to="/" />
 			</Switch>
 		</Router>

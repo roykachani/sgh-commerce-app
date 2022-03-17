@@ -33,6 +33,8 @@ export const useCheckoutItem = () => {
 
 		/*add quantity of cart product*/
 		if (filterItem.length === 1) {
+			console.log(item, 'item');
+
 			const newArrItem = [];
 			cartProducts.map((p) => {
 				if ((p.id === id) & (p.size === size) & (addQuantity > p.stock)) {
