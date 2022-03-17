@@ -8,7 +8,6 @@ import './styles.css';
 
 const Product = ({ match }) => {
 	const { state, handlerUser, handlerCart } = useContext(ModalContext);
-	console.log(match);
 	const paramId = match.params.id;
 	const path = match.path;
 
