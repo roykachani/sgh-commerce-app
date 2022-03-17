@@ -8,7 +8,7 @@ import {
 import Home from '../views/Home/Home';
 import Products from '../views/Products/Products';
 import Product from '../views/Product/Product';
-import Signin from '../views/SignIn/Signin';
+import Signin from '../views/Signin/Signin';
 import Signup from '../views/Signup/Signup';
 import Header from '../components/Header/Header';
 import AccounteCreate from '../views/AccounteCreate/AccounteCreate';
