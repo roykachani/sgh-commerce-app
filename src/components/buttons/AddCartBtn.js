@@ -1,6 +1,6 @@
 import { useCheckoutItem } from '../../hooks/useCheckoutItem';
 
-const AddCartBtn = ({ _id, idSize, price, title, sizes, photos }) => {
+const AddCartBtn = ({ _id, idSize, price, title, sizes, photos, SKU }) => {
 	const [checkCartItem] = useCheckoutItem();
 
 	let sizeKey;
@@ -8,8 +8,9 @@ const AddCartBtn = ({ _id, idSize, price, title, sizes, photos }) => {
 
 	const handlerItem = (e) => {
 		const [sizeSelect] = sizes.filter((s, index) => index === parseInt(idSize));
-		[sizeKey] = Object.keys(sizeSelect);
-		[stockSize] = Object.values(sizeSelect);
+		console.log(sizeSelect);
+		sizeKey = sizeSelect.size;
+		stockSize = sizeSelect.stock;
 		const item = {
 			id: _id,
 			size: sizeKey,
@@ -18,6 +19,7 @@ const AddCartBtn = ({ _id, idSize, price, title, sizes, photos }) => {
 			addQuantity: 1,
 			stock: stockSize,
 			photos: photos,
+			SKU: SKU,
 		};
 		checkCartItem(item);
 	};
