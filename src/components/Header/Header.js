@@ -9,11 +9,13 @@ import LogoW from '../../assets/logo_w.png';
 import UserIcon from '../Icons/UserIcon';
 
 import './styles.css';
+import { CartContext } from '../../context/Cart';
 
 export default memo(function Header() {
 	const [scroll, setScroll] = useState(false);
 
 	const { state, handlerUser, handlerCart } = useContext(ModalContext);
+	const { cartState } = useContext(CartContext);
 
 	const toggleNav = useCallback(() => {
 		window.addEventListener('scroll', () => {
@@ -66,8 +68,13 @@ export default memo(function Header() {
 							<div className="nav_user" onClick={handlerMenu}>
 								<UserIcon />
 							</div>
-							<div className="nav_cart" onClick={handlerCartMenu}>
+							<div className="nav_cart counter_nav" onClick={handlerCartMenu}>
 								<BagIcon />
+								{cartState.totalCart?.items > 0 && (
+									<div className="box_counter_items">
+										{cartState.totalCart.items}
+									</div>
+								)}
 							</div>
 						</div>
 					</div>
