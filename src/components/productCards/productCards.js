@@ -16,6 +16,7 @@ const ProductCards = ({
 	modalId,
 	showModal,
 	classSale,
+	SKU,
 }) => {
 	const [classState, setclassState] = useState('hidden');
 	const { state } = useContext(ModalContext);
@@ -59,8 +60,8 @@ const ProductCards = ({
 				>
 					<div className="box_stock">
 						{sizes.map((s, index) => {
-							[sizeKey] = Object.keys(s);
-							[sizeStockValue] = Object.values(s);
+							sizeKey = s.size;
+							sizeStockValue = s.stock;
 							return (
 								<div
 									id={index}
@@ -91,6 +92,7 @@ const ProductCards = ({
 							title={title}
 							sizes={sizes}
 							photos={photos}
+							SKU={SKU}
 						/>
 					</div>
 				</div>
