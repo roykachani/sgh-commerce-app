@@ -1,0 +1,19 @@
+.total_price_payment {
+	justify-content: flex-end;
+}
+.total_price {
+	width: 100%;
+}
+.payment_box_buttons {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.payment_back_btn {
+	justify-content: flex-start;
+}
+.btn_payment_back {
+	background: #00a698;
+	color: whitesmoke;
+}

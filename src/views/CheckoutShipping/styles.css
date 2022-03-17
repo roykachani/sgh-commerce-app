@@ -1,0 +1,127 @@
+.data_form_container {
+	width: 1200px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+}
+.data_form_box_title {
+	margin: 20px 0;
+	width: 100%;
+	display: flex;
+	padding: 10px;
+	background: #e7e7e7;
+	border-radius: 2px 0 0 2px;
+	-webkit-border-radius: 2px 0 0 2px;
+	-moz-border-radius: 2px 0 0 2px;
+	-ms-border-radius: 2px 0 0 2px;
+	-o-border-radius: 2px 0 0 2px;
+}
+
+.data_form_box {
+	color: #222;
+	width: 100%;
+	margin: 10px 0 30px 0;
+	padding: 10px;
+	background: #e7e7e7;
+	display: flex;
+	justify-content: center;
+}
+/*extra box*/
+.extra_box {
+	width: 100%;
+	margin: 25px 0 15px 0;
+	display: flex;
+	justify-content: space-between;
+}
+
+.back_products_box {
+	width: 80%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+.back_products {
+	color: #222;
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.secure_payment_box {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-end;
+	color: #7f7f7f;
+}
+.leyend_secure {
+	font-size: 12px;
+	margin-right: 5px;
+}
+.icon_secured_box {
+	display: flex;
+}
+
+.secure_bottom {
+	width: 100%;
+	margin-bottom: 25px;
+}
+
+/*form*/
+.form_cnt {
+	width: 95%;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+.title_form_Shipping {
+	color: #333;
+}
+
+.input_box_shipping {
+	width: 80%;
+	display: flex;
+	align-items: center;
+}
+
+.label_box_shipping {
+	width: 220px;
+	display: flex;
+	align-items: center;
+}
+
+.input_shipping {
+	width: 90px;
+	padding: 0 5px;
+}
+
+.select_input {
+	display: block;
+	height: 30px;
+	width: 200px;
+	font-size: 14px;
+	padding: 0 5px;
+	border-radius: 2px;
+	margin: 10px 0;
+}
+.link_box_shipping {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-right: 10px;
+}
+.link_shipping_cp {
+	align-items: center;
+	text-decoration: underline;
+}
+.shipping_error {
+	color: crimson;
+}
+.method_shipping {
+	font-size: 16px;
+	text-decoration: underline;
+}
+.method_shipping_span {
+	margin-right: 10px;
+	color: #00a650;
+}

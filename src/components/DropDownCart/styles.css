@@ -172,11 +172,41 @@
 	text-align: center;
 }
 
+.box_adress_cart_menu {
+	margin: 20px 0;
+}
+
+.checkbox_shipping {
+	margin: 20px 0;
+	padding: 0 20px;
+	display: flex;
+	align-items: center;
+}
+.checkbox_leyend {
+	font-size: 12px;
+	cursor: pointer;
+	color: #00a650;
+}
+.checkbox_leyend_price {
+	color: #222;
+}
+
+.checkbox_input {
+	cursor: pointer;
+	margin: 0 10px;
+	width: 18px;
+	height: 18px;
+}
+.checkbox_input:checked {
+	background: #00a698;
+}
+
 .checkout_cart {
 	width: 70%;
 }
 .btn_center_box {
 	display: flex;
+	margin-top: 25px;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
