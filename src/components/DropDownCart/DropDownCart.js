@@ -7,37 +7,64 @@ import {
 	useState,
 } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
 import { AuthContext } from '../../context/Auth';
 import { CartContext } from '../../context/Cart';
 import { ModalContext } from '../../context/Modal';
+import { useTotalCart } from '../../hooks/useTotalcart';
 import { currencyFormat } from '../../utils/currencyConvert';
 import ProductsCart from '../ProductsCart/ProductsCart';
 
 import './styles.css';
 
 export const DropDownCart = memo(() => {
-	const { cartState, handlerMessages } = useContext(CartContext);
+	const { cartState, handlerMessages, totalCart } = useContext(CartContext);
 	const { state, handlerCart } = useContext(ModalContext);
 	const { userState } = useContext(AuthContext);
 	const [hiddenclass, setHiddenclass] = useState(null);
+	const [shipping, setShipping] = useState([
+		{
+			id: 1,
+			name: 'private',
+			title: 'ENVIO A DOMICILIO - Entrega Privada en 48hs',
+			status: true,
+		},
+		{
+			id: 2,
+			name: 'store',
+			title: 'RETIRO EN SUCURSAL - GRATIS',
+			status: false,
+		},
+	]);
+	const shippingPrice = 400;
 
+	const [subTotalPrice, totalPrice] = useTotalCart();
 	const history = useHistory();
 
 	const { cartProducts } = cartState;
 
-	const handlerMenu = () => {
-		if (!!state.modalCart) handlerCart();
+	const handleSelect = (id) => {
+		setShipping(
+			shipping.map((m) =>
+				m.id === id ? { ...m, status: !m.status } : { ...m, status: false }
+			)
+		);
 	};
+	useEffect(() => {
+		shipping.map((m) => {
+			if (!!m.status) {
+				const checkoutObj = {
+					...cartState.totalCart,
+					shipping: m.name,
+				};
+				totalCart(checkoutObj);
+			}
+		});
+	}, [shipping]);
 
-	const total = useMemo(
-		() => cartProducts.reduce((total, p) => total + p.price * p.addQuantity, 0),
-		[cartProducts]
-	);
-	const newPrice = () => {
-		return currencyFormat(total);
-	};
+	const handlerMenu = useCallback(() => {
+		if (!!state.modalCart) handlerCart();
+	}, [state.modalCart, handlerCart]);
 
 	useEffect(() => {
 		if (!!hiddenclass) setTimeout(() => setHiddenclass(null), 3000);
@@ -55,7 +82,7 @@ export const DropDownCart = memo(() => {
 			history.push('/cvn/checkout/cart');
 			handlerMenu();
 		}
-	});
+	}, [userState, cartProducts.length, history, handlerMenu, handlerMessages]);
 
 	return (
 		<div
@@ -85,10 +112,10 @@ export const DropDownCart = memo(() => {
 					<div className="subtitles_cartbox">
 						<div className="subtitles_cart total_cart">
 							<div>
-								<h4 className="subtitle_cart">Total</h4>
+								<h4 className="subtitle_cart">SubTotal</h4>
 							</div>
 							<div>
-								<h4 className="subtitle_cart">ARS{newPrice()}</h4>
+								<h4 className="subtitle_cart">ARS{subTotalPrice()}</h4>
 							</div>
 						</div>
 					</div>
@@ -96,10 +123,42 @@ export const DropDownCart = memo(() => {
 						<div className="hr hr_cart"></div>
 					</div>
 					<div className="cnt_adress_cart_menu">
-						<h3>Metodo de envio</h3>
+						<h3 className="title_cart_menu">Metodos de envio</h3>
 						<div className="box_adress_cart_menu">
-							<input type="checkbox" name="privado" />
-							<input type="checkbox" name="retiro" />
+							{shipping.map((m) => {
+								return (
+									<div className="checkbox_shipping" key={m.id}>
+										<span
+											className="checkbox_leyend"
+											onClick={() => handleSelect(m.id)}
+										>
+											{m.title}{' '}
+											{m.id === 1 && (
+												<span className="checkbox_leyend_price">
+													por ${shippingPrice}
+												</span>
+											)}
+										</span>
+										<input
+											className="checkbox_input"
+											type="checkbox"
+											name={m.name}
+											value={m.name}
+											checked={m.status}
+											id={m.id}
+											onChange={() => handleSelect(m.id)}
+										/>
+									</div>
+								);
+							})}
+							<div className="subtitles_cart total_cart">
+								<div>
+									<h4 className="subtitle_cart">Total</h4>
+								</div>
+								<div>
+									<h4 className="subtitle_cart">ARS{totalPrice()}</h4>
+								</div>
+							</div>
 							<div className="btn_center_box">
 								<button
 									onClick={handleCheckout}
