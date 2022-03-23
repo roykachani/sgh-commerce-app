@@ -9,6 +9,8 @@ export const usePost = () => {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json',
+							// 'Access-Control-Allow-Origin': 'https://localhost:3000',//mp dev
+							'Access-Control-Allow-Origin': 'https://cvn-store.vercel.app', //mp prod
 						},
 
 						body: JSON.stringify(object),
@@ -25,6 +27,8 @@ export const usePost = () => {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json',
+							// 'Access-Control-Allow-Origin': 'http://localhost:3000',
+							'Access-Control-Allow-Origin': 'https://cvn-store.vercel.app', //mp prod
 							Authorization: Authorization,
 						},
 
@@ -32,7 +36,7 @@ export const usePost = () => {
 					}
 				);
 				const data = await response.json();
-				// console.log(data, 'datapost');
+				console.log(data, 'datapost');
 				return data;
 			}
 		} catch (error) {

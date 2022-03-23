@@ -17,7 +17,8 @@ const PaymentsCheckout = () => {
 	const [subTotalPrice, totalPrice, totalShipping] = useTotalCart();
 
 	const history = useHistory();
-
+	const configuracion_ventana =
+		'menubar=no,location=yes,resizable=yes,scrollbars=yes,status=yes';
 	const handlePayment = () => {
 		const obj = {
 			products: totalCart.products,
@@ -31,8 +32,9 @@ const PaymentsCheckout = () => {
 		if (cartState.paymentMethod?.status === 401) {
 			exit();
 			return history.push('/signin');
-		} else if (cartState.paymentMethod?.status === 201) {
-			return history.push('/user/lastshopping/index');
+		} else if (cartState.paymentMethod?.status === 200) {
+			console.log(cartState.paymentMethod.urlSandbox);
+			window.location.assign(cartState.paymentMethod.initPoint);
 		}
 	}, [cartState.paymentMethod, exit, history]);
 
