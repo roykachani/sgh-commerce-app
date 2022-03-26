@@ -17,8 +17,7 @@ const PaymentsCheckout = () => {
 	const [subTotalPrice, totalPrice, totalShipping] = useTotalCart();
 
 	const history = useHistory();
-	const configuracion_ventana =
-		'menubar=no,location=yes,resizable=yes,scrollbars=yes,status=yes';
+
 	const handlePayment = () => {
 		const obj = {
 			products: totalCart.products,
