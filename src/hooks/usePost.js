@@ -1,7 +1,7 @@
 export const usePost = () => {
 	const postData = async (endPoint, object, config) => {
 		try {
-			// console.log(object);
+			console.log(object, 'object');
 			if (!config) {
 				const response = await fetch(
 					`${process.env.REACT_APP_BACKEND_URL}${endPoint}`,
@@ -10,7 +10,7 @@ export const usePost = () => {
 						headers: {
 							'Content-Type': 'application/json',
 							// 'Access-Control-Allow-Origin': 'https://localhost:3000',//mp dev
-							'Access-Control-Allow-Origin': 'https://cvn-store.vercel.app/', //mp prod
+							'Access-Control-Allow-Origin': 'https://cvn-store.vercel.app', //mp prod
 						},
 
 						body: JSON.stringify(object),
@@ -27,8 +27,8 @@ export const usePost = () => {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json',
-							// 'Access-Control-Allow-Origin': 'http://localhost:3000',
-							'Access-Control-Allow-Origin': 'https://cvn-store.vercel.app/', //mp prod
+							'Access-Control-Allow-Origin': 'http://localhost:3000',
+							// 'Access-Control-Allow-Origin': 'https://cvn-store.vercel.app', //mp prod
 							Authorization: Authorization,
 						},
 
